@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header__wrapper">
-      <h1>Rocks<br>Paper<br>Scissors<br>Lizard<br>Spook</h1>
+      <h1>Rock<br>Paper<br>Scissors<br>Lizard<br>Spook</h1>
       <ScoreBoard />
     </div>
 </header>
