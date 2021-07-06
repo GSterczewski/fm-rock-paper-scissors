@@ -5,12 +5,16 @@
   <ScoreBoard />
   </div>
 </header>
+<main>
+  <VButton name="Rules"  />
+</main>
 </template>
 
 <script>
 import ScoreBoard from "./components/ScoreBoard.vue";
+import VButton from "./components/VButton.vue";
 export default {
-  components: { ScoreBoard }
+  components: { ScoreBoard, VButton }
 }
 </script>
 
@@ -26,6 +30,11 @@ body{
   background-repeat: no-repeat;
   min-height: 100vh;
   padding: 4rem 1rem;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+h1{
+  text-transform: uppercase;
+  font-weight: 600;
 }
   .header__wrapper{
     width:60%;
