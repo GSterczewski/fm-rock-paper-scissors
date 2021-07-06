@@ -19,10 +19,12 @@ export default {
 
 <style lang="scss">
   .button {
-    padding: 0.7rem 2.35rem;
-    text-transform: uppercase;
-    font-weight: 700;
     cursor:pointer;
+    padding: 0.7rem 2.35rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 1rem;
   }
   .button--outline{
     background-color: transparent;
