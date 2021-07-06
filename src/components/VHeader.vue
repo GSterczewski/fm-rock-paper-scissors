@@ -33,7 +33,7 @@ h1{
     justify-content: space-between;
     margin:0 auto;
     padding: 1rem 1.8rem;
-    border: 2px solid white;
+    border: 2px solid var(--color-header-outline);
     border-radius:15px;
     color: var(--color-white);
     
