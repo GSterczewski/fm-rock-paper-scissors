@@ -32,10 +32,13 @@ h1{
     display: flex;
     justify-content: space-between;
     margin:0 auto;
-    padding: 2rem;
+    padding: 1rem 1.8rem;
     border: 2px solid white;
     border-radius:15px;
     color: var(--color-white);
     
+    @media(max-width:650px){
+      padding: 0.75rem 1rem;
+    }
   }
 </style>
