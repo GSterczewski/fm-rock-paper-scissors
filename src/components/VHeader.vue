@@ -28,6 +28,7 @@ h1{
 }
   .header__wrapper{
     width:60%;
+    min-width:320px;
     display: flex;
     justify-content: space-between;
     margin:0 auto;
@@ -35,5 +36,6 @@ h1{
     border: 2px solid white;
     border-radius:15px;
     color: var(--color-white);
+    
   }
 </style>
