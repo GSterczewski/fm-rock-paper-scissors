@@ -20,29 +20,24 @@ export default {
 </script>
 
 <style lang="scss">
-@mixin circle($size){
-  width:$size;
-  height:$size;
-  border-radius: 50%;
 
-}
 
 .play-button {
-  @include circle(8rem);
+  @include circle(100px);
   display: flex;
   align-items: center;
   justify-content: center;
   border:none;
  
   &__icon-container{
-    @include circle(6rem);
+    @include circle(75px);
     background-color: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
   }
-
 }
+
 $variants : 'scissors', 'rock', 'paper', 'lizard', 'spook';
 
 @each $variant in $variants {
