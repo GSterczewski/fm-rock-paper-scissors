@@ -1,10 +1,12 @@
 <template>
-<div>
+<div class="layout-wrapper">
 <VHeader />
 <main>
-  <GameBoard :variants="['scissors','spook','paper','lizard','rock']" />
+    <GameBoard :variants="['scissors','spook','paper','lizard','rock']" />
 </main>
-  <VButton name="Rules"  />
+  <div class="rules-button-container">
+    <VButton name="Rules"  />
+  </div>
 </div>
 </template>
 
@@ -24,16 +26,32 @@ export default {
   margin:0;
 }
 body{
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.layout-wrapper{
   background-image: var(--gradient-background);
   background-size: cover;
   background-repeat: no-repeat;
+  padding: 2rem 1rem 1rem;
   min-height: 100vh;
-  padding: 4rem 1rem;
-  font-family: 'Barlow Semi Condensed', sans-serif;
-}
-main{
-  margin-top: 4rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  @media(min-height:1000px){
+    justify-content: space-around;
+  }
 }
+@media(min-width:1000px){
+  .rules-button-container{
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+    padding:1rem;
+  }
+}
+
+
 </style>

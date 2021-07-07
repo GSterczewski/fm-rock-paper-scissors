@@ -16,6 +16,10 @@ export default {
 </script>
 
 <style lang="scss">
+header{
+  width:100%;
+
+}
 h1{
   text-transform: uppercase;
   font-weight: 600;
@@ -27,6 +31,7 @@ h1{
   }
 }
   .header__wrapper{
+
     width:60%;
     min-width:320px;
     display: flex;
