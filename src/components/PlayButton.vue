@@ -1,15 +1,13 @@
 <template>
-  <button class="play-button" :class="`color-variant--${variant}`">
-    <div class="play-button__icon-container">
-      <PlayButtonIcon :variant="variant" @click="clickHandler" />
-    </div>
+  <button @click="clickHandler" class="play-button" >
+      <FigureIcon :variant="variant"  />
   </button>
 </template>
 
 <script>
-import PlayButtonIcon from "./PlayButtonIcon.vue";
+import FigureIcon from "./FigureIcon.vue";
 export default {
-  components: { PlayButtonIcon },
+  components: { FigureIcon },
   props:{
     variant: {
       type:String,
@@ -29,27 +27,10 @@ export default {
 
 
 .play-button {
-  @include circle(100px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: none;
   border:none;
   cursor:pointer;
-  &__icon-container{
-    @include circle(75px);
-    background-color: var(--color-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 }
 
-$variants : 'scissors', 'rock', 'paper', 'lizard', 'spook';
-
-@each $variant in $variants {
-  .color-variant--#{$variant}{
-    background-image: var(--gradient-#{$variant});
-
-  }
-} 
+ 
 </style>
