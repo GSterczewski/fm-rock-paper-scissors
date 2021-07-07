@@ -2,17 +2,14 @@
   <header class="header">
     <div class="header__wrapper">
       <h1>Rock<br>Paper<br>Scissors<br>Lizard<br>Spook</h1>
-      <ScoreBoard />
+      <slot />
     </div>
 </header>
 </template>
 
 <script>
-import ScoreBoard from "./ScoreBoard.vue";
 
-export default {
-  components: { ScoreBoard }
-}
+
 </script>
 
 <style lang="scss">
