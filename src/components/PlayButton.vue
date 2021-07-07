@@ -24,8 +24,6 @@ export default {
 </script>
 
 <style lang="scss">
-
-
 .play-button {
   background: none;
   border:none;

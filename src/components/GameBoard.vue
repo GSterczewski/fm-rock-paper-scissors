@@ -7,7 +7,8 @@
     <div class="gameboard__stage-2" v-if="gameStage > 0">
       <div class="gameboard__stage-2__section">
         <h2>You picked</h2>
-        <div class="selection-placeholder"></div>
+        <FigureIcon v-if="playerFigure.length" :variant="playerFigure" />
+        <div v-else class="selection-placeholder"></div>
       </div>
       <div class="gameboard__stage-2__result-container" v-if="gameStage > 1">
         <h3 v-text="message"></h3>
@@ -15,7 +16,8 @@
       </div>
       <div class="gameboard__stage-2__section">
         <h2>The House picked</h2>
-        <div class="selection-placeholder"></div>
+        <FigureIcon v-if="houseFigure.length" :variant="houseFigure" />
+        <div v-else class="selection-placeholder"></div>
       </div>
     </div>
   </div>
@@ -24,9 +26,10 @@
 <script>
 import PlayButton from "./PlayButton.vue";
 import VButton from "./VButton.vue";
+import FigureIcon from "./FigureIcon.vue";
 import { ref, toRefs, watch, onMounted } from "vue";
 export default {
-  components:{ PlayButton, VButton },
+  components:{ PlayButton, VButton, FigureIcon },
   props: {
     variants: {
       type: Array,
@@ -47,6 +50,14 @@ export default {
     gameStage: {
       type: Number,
       default: 2
+    },
+    playerFigure: {
+      type: String,
+      default : ""
+    },
+    houseFigure: {
+      type: String,
+      default: ""
     }
   },
   setup(props){
@@ -56,23 +67,23 @@ export default {
     }
     const message = ref("");
     const { gameStage } = toRefs(props);
-    
+   
     const getMessage = () => {
       if(gameStage.value === 2){
         message.value = resultMessages.win;
       }
       if(gameStage.value === 3){
         message.value = resultMessages.lost;
-
       }
     };
     
     watch(gameStage, getMessage);
-
-    onMounted(getMessage);
     
+    onMounted(getMessage);
+  
     return {
-      message
+      message,
+    
     };
   }
 }

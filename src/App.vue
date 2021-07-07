@@ -5,7 +5,11 @@
 </VHeader>
 <main>
     <GameBoard :variants="Object.values(possibleFigures)"
-      :handleFigureSelect="selectPlayerFigure" :gameStage="currentGameStage" :handlePlayAgain="playAgain"
+      :handleFigureSelect="selectPlayerFigure" 
+      :gameStage="currentGameStage" 
+      :handlePlayAgain="playAgain"
+      :playerFigure="possibleFigures[playerFigure]"
+      :houseFigure="possibleFigures[houseFigure]"
      />
 </main>
   <div class="rules-button-container">
