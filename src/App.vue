@@ -17,6 +17,9 @@ import VButton from "./components/VButton.vue";
 export default {
   components: { VHeader, VButton, GameBoard }
 }
+
+
+
 </script>
 
 <style lang="scss">
@@ -52,6 +55,9 @@ body{
     padding:1rem;
   }
 }
-
+main{
+  width:60%;
+  min-width:320px;
+}
 
 </style>
