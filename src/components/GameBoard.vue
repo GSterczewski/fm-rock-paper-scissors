@@ -63,7 +63,8 @@ export default {
   setup(props){
     const resultMessages = {
       win: "you win",
-      lost: "you lost"
+      lost: "you lost",
+      draw: "draw"
     }
     const message = ref("");
     const { gameStage } = toRefs(props);
@@ -74,6 +75,9 @@ export default {
       }
       if(gameStage.value === 3){
         message.value = resultMessages.lost;
+      }
+      if(gameStage.value === 4){
+        message.value = resultMessages.draw;
       }
     };
     

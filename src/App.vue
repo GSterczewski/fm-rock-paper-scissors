@@ -28,10 +28,11 @@ export default {
   components: { VHeader, VButton, GameBoard, ScoreBoard },
   setup(){
     const gameStages = {
-      beforeSelect: 0,
-      selected: 1,
-      won: 2,
-      lost: 3 
+      beforeSelect : 0,
+      selected : 1,
+      won : 2,
+      lost : 3,
+      draw : 4 
     };
     const possibleFigures = {
       0 : "rock",
@@ -95,8 +96,10 @@ export default {
       };
 
       const getWinner = () => {
-            
-          if(resultsMap[possibleFigures[playerFigure.value]].includes(possibleFigures[houseFigure.value])){
+           if(playerFigure.value === houseFigure.value){
+             setStage(gameStages.draw);
+           } 
+          else if(resultsMap[possibleFigures[playerFigure.value]].includes(possibleFigures[houseFigure.value])){
             console.log("player won");
             setStage(gameStages.won);
             incrementScore();
