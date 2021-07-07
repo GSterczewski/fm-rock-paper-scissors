@@ -1,7 +1,7 @@
 <template>
   <button class="play-button" :class="`color-variant--${variant}`">
     <div class="play-button__icon-container">
-      <PlayButtonIcon :variant="variant" />
+      <PlayButtonIcon :variant="variant" @click="clickHandler" />
     </div>
   </button>
 </template>
@@ -11,9 +11,15 @@ import PlayButtonIcon from "./PlayButtonIcon.vue";
 export default {
   components: { PlayButtonIcon },
   props:{
-    variant :{
+    variant: {
       type:String,
       default:'scissors'
+    },
+    clickHandler: {
+      type: Function,
+      default: () => {
+        cosnole.warn("click handler not registred");
+      }
     }
   }
 }
@@ -28,7 +34,7 @@ export default {
   align-items: center;
   justify-content: center;
   border:none;
- 
+  cursor:pointer;
   &__icon-container{
     @include circle(75px);
     background-color: var(--color-white);
