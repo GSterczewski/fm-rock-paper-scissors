@@ -60,14 +60,14 @@ export default {
 
 <style lang="scss">
 .figure {
- @include circle(100px);
+ @include circle(130px);
   display: flex;
   align-items: center;
   justify-content: center;
   border:none;
 
   &__icon-container{
-    @include circle(75px);
+    @include circle(100px);
     background-color: var(--color-white);
     display: flex;
     align-items: center;

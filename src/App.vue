@@ -179,6 +179,13 @@ body{
     justify-content: space-around;
   }
 }
+
+
+main{
+  width:60%;
+  min-width:320px;
+}
+
 @media(min-width:1000px){
   .rules-button-container{
     width:100%;
@@ -186,10 +193,9 @@ body{
     justify-content: flex-end;
     padding:1rem;
   }
-}
-main{
-  width:60%;
-  min-width:320px;
-}
+  main {
+    margin-top:5rem;
 
+  }
+}
 </style>

@@ -111,27 +111,25 @@ export default {
     & >*:nth-child(2){
       top:0;
       left:50%;
-      transform: translate(-50%, -25%);
+      transform: translate(-50%, -50%);
     }
     & >*:nth-child(3){
-      top:0;
       
-      left: -10%;
-      top:70px;
+      left: -15%;
       top:20%;
     }
     & >*:nth-child(4){
-      top:0;
-      right:-10%;
+      
+      right:-15%;
       top: 20%;
     }
     & >*:nth-child(5){
-      bottom: -10%;
-      right: 10%;
+      bottom: -15%;
+      right: -5%;
     }
     & >*:nth-child(6){
-      bottom: -10%;
-      left: 10%;
+      bottom: -15%;
+      left: -5%;
     }
   @media(max-width:500px){
     transform: scale(0.8);
