@@ -72,6 +72,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: inset 0px 8px 3px #97a0b0;
   }
 }
 $variants : 'scissors', 'rock', 'paper', 'lizard', 'spook';
@@ -79,6 +80,7 @@ $variants : 'scissors', 'rock', 'paper', 'lizard', 'spook';
 @each $variant in $variants {
   .color-variant--#{$variant}{
     background-image: var(--gradient-#{$variant});
+    box-shadow: 0px 5px 0px var(--color-#{$variant});
 
   }
 }

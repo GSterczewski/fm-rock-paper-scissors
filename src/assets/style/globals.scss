@@ -1,11 +1,16 @@
 :root {
   --color-white: white;
   --gradient-scissors: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
+  --color-scissors: #b27b16;
   --gradient-paper: linear-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%));
+  --color-paper: #2644e4;
   --gradient-rock: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
+  --color-rock: #ae2a43;
   --gradient-lizard: linear-gradient(hsl(261, 73%, 60%), hsl(261, 72%, 63%));
+  --color-lizard: #6830cf;
   --color-cyan: linear-gradient(hsl(189, 59%, 53%), hsl(189, 58%, 57%));
   --gradient-spook: linear-gradient(hsl(189, 59%, 53%), hsl(189, 58%, 57%));
+  --color-spook: #3894a3;
   --gradient-background: radial-gradient(
     hsl(214, 47%, 23%),
     hsl(237, 49%, 15%)
