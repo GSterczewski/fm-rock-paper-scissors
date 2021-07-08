@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header__wrapper">
-      <h1>Rock<br>Paper<br>Scissors<br>Lizard<br>Spook</h1>
+      <img alt="Rock Paper Scissors Lizard Spook" src="../assets/images/logo-bonus.svg" />
       <slot />
     </div>
 </header>
