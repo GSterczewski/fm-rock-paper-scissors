@@ -2,7 +2,7 @@
 <div class="figure" :class="`color-variant--${color}`">
   <div class="figure__icon-container">
     <svg xmlns="http://www.w3.org/2000/svg" :width="variants[variant].width" :height="variants[variant].height">
-      <path fill="#3B4262" :d="variants[variant].d"/>
+      <path  :d="variants[variant].d"/>
     </svg>
   </div>
   
@@ -82,6 +82,16 @@ $variants : 'scissors', 'rock', 'paper', 'lizard', 'spook';
     background-image: var(--gradient-#{$variant});
     box-shadow: 0px 5px 0px var(--color-#{$variant});
 
+    & > .figure__icon-container > svg {
+      fill:#3B4262;
+      transition: all 0.3s ease-out;
+    }
+    button:hover > & > .figure__icon-container > svg,
+    button:focus > & > .figure__icon-container > svg {
+      fill:var(--color-#{$variant});
+    }
+    
   }
+    
 }
 </style>
