@@ -1,5 +1,6 @@
 <template>
 <div class="layout-wrapper">
+<RulesModal :isActive="isRulesModalActive" :handleClose="hideRulesModal" />
 <VHeader>
   <ScoreBoard :score="score" />
 </VHeader>
@@ -13,7 +14,7 @@
      />
 </main>
   <div class="rules-button-container">
-    <VButton name="Rules"  />
+    <VButton name="Rules" @click="showRulesModal"  />
   </div>
 </div>
 </template>
@@ -23,9 +24,10 @@ import VHeader from "./components/VHeader.vue";
 import ScoreBoard from "./components/ScoreBoard.vue";
 import GameBoard from "./components/GameBoard.vue";
 import VButton from "./components/VButton.vue";
+import RulesModal from "./components/RulesModal.vue";
 import { ref } from "vue";
 export default {
-  components: { VHeader, VButton, GameBoard, ScoreBoard },
+  components: { VHeader, VButton, GameBoard, ScoreBoard, RulesModal },
   setup(){
     const gameStages = {
       beforeSelect : 0,
@@ -121,7 +123,18 @@ export default {
       const playAgain = () => {
         setStage(gameStages.beforeSelect);
 
-      };  
+      };
+      
+      // modal state
+      const isRulesModalActive = ref(false);
+      
+      const showRulesModal = () => {
+        isRulesModalActive.value = true;
+      };
+      const hideRulesModal = () => {
+        isRulesModalActive.value = false;
+      };
+
     return {
       score,
       currentGameStage,
@@ -129,7 +142,10 @@ export default {
       playerFigure,
       houseFigure,
       possibleFigures,
-      playAgain
+      playAgain,
+      showRulesModal,
+      hideRulesModal,
+      isRulesModalActive
     }
   }
 }
