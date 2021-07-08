@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <div class="header__wrapper">
-      <img alt="Rock Paper Scissors Lizard Spook" src="../assets/images/logo-bonus.svg" />
+      <h1>
+        <img alt="Rock Paper Scissors Lizard Spook" src="../assets/images/logo-bonus.svg" />  
+      </h1>
       <slot />
     </div>
 </header>
@@ -18,14 +20,9 @@ header{
 
 }
 h1{
-  text-transform: uppercase;
-  font-weight: 600;
-
-  & > br {
-    display: block;
-    line-height: 1px;
-    margin-top: -13px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
   .header__wrapper{
 
