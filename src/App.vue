@@ -55,15 +55,30 @@ export default {
     const score = ref(0);
     const localStorageKey = "rpsls-score";
     
+    const isLocalStorageAvailable = () => {
+      const name = "localStorageTest-RPSLS";
+      try {
+        localStorage.setItem(name,name);
+        localStorage.removeItem(name);
+        return true;
+      } catch(e) {
+        console.warn("local storage not available");
+        return false;
+      }
+    }
     const saveScore = () => {
-      localStorage.setItem(localStorageKey,JSON.stringify(score.value));
+      if(isLocalStorageAvailable()){
+        localStorage.setItem(localStorageKey,JSON.stringify(score.value));
+      }
     };
 
     const loadScore = () => {
-     let savedScore = localStorage.getItem(localStorageKey);
-     if(savedScore){
-       score.value = JSON.parse(savedScore);
-     } 
+      if(isLocalStorageAvailable()){
+        let savedScore = localStorage.getItem(localStorageKey);
+        if(savedScore){
+          score.value = JSON.parse(savedScore);
+        } 
+      }
 
     };
   onMounted(loadScore);
