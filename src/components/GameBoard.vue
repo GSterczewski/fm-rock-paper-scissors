@@ -141,13 +141,11 @@ export default {
      align-items: center;
      width:100%;
      color: var(--color-white);
-
-     &__result-container {
-       & > h3 {
-         font-size: 4rem;
-         margin-bottom:1rem;
-       }
-     }
+      &__heading {
+        font-size: 4rem;
+       margin-bottom:1rem;
+      }
+     
      &__button{
        transition: opacity .5s ease-in 0.5s;
        padding: 1.2rem 3.5rem;
@@ -191,10 +189,20 @@ export default {
        flex-wrap: wrap;
        &__section{
          width:50%;
+         font-size:0.8rem;
        }
        &__result-container{
          order:3;
-         margin-top:5rem;
+         margin-top:3rem;
+         
+       }
+
+       &__heading {
+         font-size:2.4rem;
+       }
+
+       &__button {
+         padding:1rem 2.5rem;
        }
      }
    }
