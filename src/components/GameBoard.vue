@@ -10,9 +10,9 @@
         <FigureIcon v-if="playerFigure.length" :variant="playerFigure" />
         <div v-else class="selection-placeholder"></div>
       </div>
-      <div class="gameboard__stage-2__result-container" v-if="gameStage > 1">
-        <h3 v-text="message"></h3>
-        <VButton name="play again" class="gameboard__stage-2__button" :clickHandler="handlePlayAgain" />
+      <div class="gameboard__stage-2__result-container">
+        <h3 class="gameboard__stage-2__heading" :class="gameStage > 1 ? 'gameboard__stage-2__heading--visible' :'' " :aria-hidden="gameStage <= 1" v-text="message"></h3>
+        <VButton  name="play again" class="gameboard__stage-2__button" :class="gameStage > 1 ? 'gameboard__stage-2__button--visible' :'' " :clickHandler="handlePlayAgain" :disabled="gameStage <= 1" />
       </div>
       <div class="gameboard__stage-2__section">
         <h2>The House picked</h2>
@@ -141,18 +141,31 @@ export default {
      align-items: center;
      width:100%;
      color: var(--color-white);
-
-     &__result-container {
-       & > h3 {
-         font-size: 4rem;
-         margin-bottom:1rem;
-       }
-     }
+      &__heading {
+        font-size: 4rem;
+       margin-bottom:1rem;
+      }
+     
      &__button{
+       transition: opacity .5s ease-in 0.5s;
        padding: 1.2rem 3.5rem;
        background-color: var(--color-white);
        color: var(--color-text);
-     }     
+       opacity:0;
+     }
+     &__button--visible {
+       opacity:1;
+     }
+     &__button:disabled{
+       cursor: initial;
+     } 
+     &__heading {
+       transition: .35s ease-in;
+     transform: scale(0);
+     }    
+     &__heading--visible {
+       transform: scale(1);
+     }
    } 
    .gameboard__stage-2__section {
      width:33%;
@@ -176,11 +189,22 @@ export default {
        flex-wrap: wrap;
        &__section{
          width:50%;
+         font-size:0.8rem;
        }
        &__result-container{
          order:3;
-         margin-top:5rem;
+         margin-top:3rem;
+         
+       }
+
+       &__heading {
+         font-size:2.4rem;
+       }
+
+       &__button {
+         padding:1rem 2.5rem;
        }
      }
    }
+
 </style>
