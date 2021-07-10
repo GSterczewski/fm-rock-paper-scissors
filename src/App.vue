@@ -25,7 +25,7 @@ import ScoreBoard from "./components/ScoreBoard.vue";
 import GameBoard from "./components/GameBoard.vue";
 import VButton from "./components/VButton.vue";
 import RulesModal from "./components/RulesModal.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 export default {
   components: { VHeader, VButton, GameBoard, ScoreBoard, RulesModal },
   setup(){
@@ -53,6 +53,20 @@ export default {
     }
     // game score state
     const score = ref(0);
+    const localStorageKey = "rpsls-score";
+    
+    const saveScore = () => {
+      localStorage.setItem(localStorageKey,JSON.stringify(score.value));
+    };
+
+    const loadScore = () => {
+     let savedScore = localStorage.getItem(localStorageKey);
+     if(savedScore){
+       score.value = JSON.parse(savedScore);
+     } 
+
+    };
+  onMounted(loadScore);
 
     const incrementScore = () => {
       score.value++;
@@ -110,6 +124,7 @@ export default {
             setStage(gameStages.lost);
             if(score.value > 0) decrementScore();
           }
+          saveScore();
         }
 
       const selectPlayerFigure = figure => {
