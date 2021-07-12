@@ -212,11 +212,12 @@ body{
 
 
 main{
-  width:60%;
+  width:100%;
+  max-width:1000px;
   min-width:320px;
 }
 
-@media(min-width:1000px){
+@media(min-width:$desktop-breakpoint){
   .rules-button-container{
     width:100%;
     display: flex;

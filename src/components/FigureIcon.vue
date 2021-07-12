@@ -1,7 +1,8 @@
 <template>
-<div class="figure" :class="`color-variant--${color}`">
-  <div class="figure__icon-container">
-    <svg xmlns="http://www.w3.org/2000/svg" :width="variants[variant].width" :height="variants[variant].height">
+<div class="figure" :class="`color-variant--${color} figure--${size}`">
+  <div class="figure__icon-container" :class="`figure__icon-container--${size}`">
+    <div v-if="usePlaceholderIcon" class="figure__placeholder-icon">?</div>
+    <svg v-else xmlns="http://www.w3.org/2000/svg" :width="variants[variant].width" :height="variants[variant].height">
       <path  :d="variants[variant].d"/>
     </svg>
   </div>
@@ -16,6 +17,14 @@ export default {
     variant:{
       type:String,
       default : 'scissors'
+    },
+    size: {
+      type: String,
+      default : "normal"
+    },
+    usePlaceholderIcon: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props){
@@ -60,21 +69,46 @@ export default {
 
 <style lang="scss">
 .figure {
- @include circle(130px);
+  --mobile-breakpoint: 768px;
   display: flex;
   align-items: center;
   justify-content: center;
   border:none;
-
+  &__placeholder-icon{
+    color:var(--color-text);
+    font-size:5rem;
+  }
   &__icon-container{
-    @include circle(100px);
     background-color: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: inset 0px 8px 3px #97a0b0;
+
+    &--normal {
+      @include circle(100px);
+      
+    }
+    &--large{
+      @include circle(150px);
+
+      @media(max-width:768px){
+        @include circle(100px);
+      }
+
+    }
+  }
+  &--normal {
+    @include circle(130px);
+  }
+  &--large {
+    @include circle(200px);
+    @media(max-width:768px){
+        @include circle(130px);
+      }
   }
 }
+
 $variants : 'scissors', 'rock', 'paper', 'lizard', 'spook';
 
 @each $variant in $variants {

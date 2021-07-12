@@ -7,7 +7,7 @@
     <div class="gameboard__stage-2" v-if="gameStage > 0">
       <div class="gameboard__stage-2__section">
         <h2>You picked</h2>
-        <FigureIcon v-if="playerFigure.length" :variant="playerFigure" />
+        <FigureIcon v-if="playerFigure.length" :variant="playerFigure" size="large" :class="gameStage === 2 ? 'shadow':''" />
         <div v-else class="selection-placeholder"></div>
       </div>
       <div class="gameboard__stage-2__result-container">
@@ -16,8 +16,8 @@
       </div>
       <div class="gameboard__stage-2__section">
         <h2>The House picked</h2>
-        <FigureIcon v-if="houseFigure.length" :variant="houseFigure" />
-        <div v-else class="selection-placeholder"></div>
+        <FigureIcon v-if="houseFigure.length" :variant="houseFigure" size="large" :usePlaceholderIcon="gameStage <= 1" :class="gameStage === 3 ? 'shadow':''" />
+        
       </div>
     </div>
   </div>
@@ -178,13 +178,14 @@ export default {
        margin-bottom:3rem;
        font-weight: 700;
        letter-spacing: 5px;
+       @media(max-width:500px){
+         font-size:0.9rem;
+        letter-spacing:3px;
+       }
      }
    }
-   .selection-placeholder{
-     @include circle(10rem);
-     background-color: var(--color-text);
-   }
-   @media(max-width:1000px){
+  
+   @media(max-width:$desktop-breakpoint){
      .gameboard__stage-2 {
        flex-wrap: wrap;
        &__section{
@@ -206,5 +207,23 @@ export default {
        }
      }
    }
-
+.shadow{
+ 
+  animation: win 0.5s ease forwards;
+}
+@keyframes win {
+  0%{
+    box-shadow: 
+    0px 0px 0px 0px rgba(255,255,255,0.04),
+    0px 0px 0px 0px rgba(255,255,255,0.03),
+    0px 0px 0px 0px rgba(255,255,255,0.02);
+  }
+  100%{
+    
+    box-shadow: 
+    0px 0px 0px 30px rgba(255,255,255,0.04),
+    0px 0px 0px 60px rgba(255,255,255,0.03),
+    0px 0px 0px 90px rgba(255,255,255,0.02);
+  }
+}
 </style>
