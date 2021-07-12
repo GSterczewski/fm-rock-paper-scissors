@@ -28,6 +28,8 @@ import RulesModal from "./components/RulesModal.vue";
 import { ref, onMounted } from "vue";
 import useLocalStore from "./hooks/useLocalStore";
 import useScore from "./hooks/useScore";
+import wait from "./utils/wait";
+
 export default {
   components: { VHeader, VButton, GameBoard, ScoreBoard, RulesModal },
   setup(){
@@ -75,11 +77,7 @@ export default {
       
       
 
-      const wait = (fn,delay) => new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-          resolve(fn());
-        },delay)
-      })
+      
 
 
       const fireFunctionMultipleTimes = (fn, count, delay = 0) => {
