@@ -29,7 +29,7 @@ import { ref, onMounted } from "vue";
 import useLocalStore from "./hooks/useLocalStore";
 import useScore from "./hooks/useScore";
 import wait from "./utils/wait";
-
+import { getRandomNumberInRange } from "./utils/random";
 export default {
   components: { VHeader, VButton, GameBoard, ScoreBoard, RulesModal },
   setup(){
@@ -73,12 +73,7 @@ export default {
     const playerFigure = ref(null);
     const houseFigure = ref(null);
     
-      const getRandomNumberInRange = (min,max) => Math.round(Math.random() * (max - min) + min);
       
-      
-
-      
-
 
       const fireFunctionMultipleTimes = (fn, count, delay = 0) => {
         let results = [];
