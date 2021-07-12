@@ -178,6 +178,10 @@ export default {
        margin-bottom:3rem;
        font-weight: 700;
        letter-spacing: 5px;
+       @media(max-width:500px){
+         font-size:0.9rem;
+        letter-spacing:3px;
+       }
      }
    }
   
