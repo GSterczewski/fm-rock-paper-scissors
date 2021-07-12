@@ -25,14 +25,13 @@ import ScoreBoard from "./components/ScoreBoard.vue";
 import GameBoard from "./components/GameBoard.vue";
 import VButton from "./components/VButton.vue";
 import RulesModal from "./components/RulesModal.vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import useLocalStore from "./hooks/useLocalStore";
-import useScore from "./hooks/useScore";
-import { getRandomNumberInRange } from "./utils/random";
-import fireFunctionMultipleTimes from "./utils/fireFunctionMultipleTimes.js";
+import useGameLogic from "./hooks/useGameLogic";
 export default {
   components: { VHeader, VButton, GameBoard, ScoreBoard, RulesModal },
   setup(){
+    
     const gameStages = {
       beforeSelect : 0,
       selected : 1,
@@ -48,67 +47,14 @@ export default {
       4 : "spook"
     };
     
-    const resultsMap = {
-      "rock" : ["lizard","scissors"],
-      "paper" : ["rock","spook"],
-      "scissors" : ["paper","lizard"],
-      "lizard" : ["spook","paper"],
-      "spook" : ["scissors","rock"]
-    }
+    
     const { loadScore, saveScore } = useLocalStore();
-    const { score, incrementScore, decrementScore } = useScore();
-   
+    const { score, currentGameStage, playerFigure, houseFigure, playAgain, selectPlayerFigure } = useGameLogic(possibleFigures, gameStages);
 
     onMounted(() => loadScore(score));
+    watch(score, ()=> saveScore(score.value));
     
     
-    //game stage state
-    const currentGameStage = ref(gameStages.beforeSelect);
-    const setStage = stage => {
-      currentGameStage.value = stage;
-    };
-
-    // figure selection state
-    
-    const playerFigure = ref(null);
-    const houseFigure = ref(null);
-    
-      
-
-
-      const selectHouseFigure = () => {
-        houseFigure.value = getRandomNumberInRange(0,4);
-        console.log("house selected : ",possibleFigures[houseFigure.value]); 
-      };
-
-      const getWinner = () => {
-           if(playerFigure.value === houseFigure.value){
-             setStage(gameStages.draw);
-           } 
-          else if(resultsMap[possibleFigures[playerFigure.value]].includes(possibleFigures[houseFigure.value])){
-            console.log("player won");
-            setStage(gameStages.won);
-            incrementScore();
-          } else{
-            console.log("player lost");
-            setStage(gameStages.lost);
-            if(score.value > 0) decrementScore();
-          }
-          saveScore(score.value);
-        }
-
-      const selectPlayerFigure = figure => {
-        playerFigure.value = figure;
-        console.log("player selected : ", possibleFigures[playerFigure.value]);
-        setStage(gameStages.selected);
-        Promise.all(fireFunctionMultipleTimes(selectHouseFigure,10,200)).then(()=>{
-          getWinner();
-        });
-    };
-      const playAgain = () => {
-        setStage(gameStages.beforeSelect);
-
-      };
       
       // modal state
       const isRulesModalActive = ref(false);
