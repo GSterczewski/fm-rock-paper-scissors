@@ -27,6 +27,7 @@ import VButton from "./components/VButton.vue";
 import RulesModal from "./components/RulesModal.vue";
 import { ref, onMounted } from "vue";
 import useLocalStore from "./hooks/useLocalStore";
+import useScore from "./hooks/useScore";
 export default {
   components: { VHeader, VButton, GameBoard, ScoreBoard, RulesModal },
   setup(){
@@ -52,19 +53,11 @@ export default {
       "lizard" : ["spook","paper"],
       "spook" : ["scissors","rock"]
     }
-    // game score state
-    const score = ref(0);
     const { loadScore, saveScore } = useLocalStore();
-    
-  onMounted(() => loadScore(score));
+    const { score, incrementScore, decrementScore } = useScore();
+   
 
-    const incrementScore = () => {
-      score.value++;
-    };
-    const decrementScore = () => {
-      score.value--;
-    };
-
+    onMounted(() => loadScore(score));
     
     
     //game stage state
