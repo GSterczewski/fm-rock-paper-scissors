@@ -67,11 +67,9 @@ export default {
       hideRulesModal,
       selectPlayerFigure,
       playAgain
-    }
+    };
   }
-}
-
-
+};
 
 </script>
 
