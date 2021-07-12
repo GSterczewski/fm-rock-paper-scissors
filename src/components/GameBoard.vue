@@ -181,7 +181,7 @@ export default {
      }
    }
   
-   @media(max-width:1000px){
+   @media(max-width:$desktop-breakpoint){
      .gameboard__stage-2 {
        flex-wrap: wrap;
        &__section{
