@@ -215,6 +215,11 @@ main{
   width:100%;
   max-width:1000px;
   min-width:320px;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  margin-top:2rem;
+  margin-bottom:2rem;
 }
 
 @media(min-width:$desktop-breakpoint){
@@ -223,9 +228,10 @@ main{
     display: flex;
     justify-content: flex-end;
     padding:1rem;
+    
   }
   main {
-    margin-top:5rem;
+    margin-bottom:-4rem;
 
   }
 }
