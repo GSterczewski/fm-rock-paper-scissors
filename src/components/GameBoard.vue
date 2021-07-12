@@ -7,7 +7,7 @@
     <div class="gameboard__stage-2" v-if="gameStage > 0">
       <div class="gameboard__stage-2__section">
         <h2>You picked</h2>
-        <FigureIcon v-if="playerFigure.length" :variant="playerFigure" />
+        <FigureIcon v-if="playerFigure.length" :variant="playerFigure" size="large" />
         <div v-else class="selection-placeholder"></div>
       </div>
       <div class="gameboard__stage-2__result-container">
@@ -16,8 +16,8 @@
       </div>
       <div class="gameboard__stage-2__section">
         <h2>The House picked</h2>
-        <FigureIcon v-if="houseFigure.length" :variant="houseFigure" />
-        <div v-else class="selection-placeholder"></div>
+        <FigureIcon v-if="houseFigure.length" :variant="houseFigure" size="large" :usePlaceholderIcon="gameStage <= 1" />
+        
       </div>
     </div>
   </div>
@@ -180,10 +180,7 @@ export default {
        letter-spacing: 5px;
      }
    }
-   .selection-placeholder{
-     @include circle(10rem);
-     background-color: var(--color-text);
-   }
+  
    @media(max-width:1000px){
      .gameboard__stage-2 {
        flex-wrap: wrap;
