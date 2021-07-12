@@ -28,8 +28,8 @@ import RulesModal from "./components/RulesModal.vue";
 import { ref, onMounted } from "vue";
 import useLocalStore from "./hooks/useLocalStore";
 import useScore from "./hooks/useScore";
-import wait from "./utils/wait";
 import { getRandomNumberInRange } from "./utils/random";
+import fireFunctionMultipleTimes from "./utils/fireFunctionMultipleTimes.js";
 export default {
   components: { VHeader, VButton, GameBoard, ScoreBoard, RulesModal },
   setup(){
@@ -75,13 +75,7 @@ export default {
     
       
 
-      const fireFunctionMultipleTimes = (fn, count, delay = 0) => {
-        let results = [];
-        for(let i = 0; i < count; i++ ){
-          results.push(wait(fn,delay*i));
-        }
-        return results;
-      }
+
       const selectHouseFigure = () => {
         houseFigure.value = getRandomNumberInRange(0,4);
         console.log("house selected : ",possibleFigures[houseFigure.value]); 
