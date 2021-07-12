@@ -25,9 +25,11 @@ import ScoreBoard from "./components/ScoreBoard.vue";
 import GameBoard from "./components/GameBoard.vue";
 import VButton from "./components/VButton.vue";
 import RulesModal from "./components/RulesModal.vue";
-import { ref, onMounted, watch } from "vue";
+import { onMounted, watch } from "vue";
 import useLocalStore from "./hooks/useLocalStore";
 import useGameLogic from "./hooks/useGameLogic";
+import useModal from "./hooks/useModal";
+
 export default {
   components: { VHeader, VButton, GameBoard, ScoreBoard, RulesModal },
   setup(){
@@ -47,36 +49,24 @@ export default {
       4 : "spook"
     };
     
-    
+    const { isRulesModalActive, showRulesModal, hideRulesModal } = useModal();
     const { loadScore, saveScore } = useLocalStore();
     const { score, currentGameStage, playerFigure, houseFigure, playAgain, selectPlayerFigure } = useGameLogic(possibleFigures, gameStages);
 
     onMounted(() => loadScore(score));
     watch(score, ()=> saveScore(score.value));
-    
-    
-      
-      // modal state
-      const isRulesModalActive = ref(false);
-      
-      const showRulesModal = () => {
-        isRulesModalActive.value = true;
-      };
-      const hideRulesModal = () => {
-        isRulesModalActive.value = false;
-      };
 
     return {
       score,
       currentGameStage,
-      selectPlayerFigure,
       playerFigure,
       houseFigure,
       possibleFigures,
-      playAgain,
+      isRulesModalActive,
       showRulesModal,
       hideRulesModal,
-      isRulesModalActive
+      selectPlayerFigure,
+      playAgain
     }
   }
 }
