@@ -25,10 +25,15 @@ import ScoreBoard from "./components/ScoreBoard.vue";
 import GameBoard from "./components/GameBoard.vue";
 import VButton from "./components/VButton.vue";
 import RulesModal from "./components/RulesModal.vue";
-import { ref, onMounted } from "vue";
+import { onMounted, watch } from "vue";
+import useLocalStore from "./hooks/useLocalStore";
+import useGameLogic from "./hooks/useGameLogic";
+import useModal from "./hooks/useModal";
+
 export default {
   components: { VHeader, VButton, GameBoard, ScoreBoard, RulesModal },
   setup(){
+    
     const gameStages = {
       beforeSelect : 0,
       selected : 1,
@@ -44,143 +49,27 @@ export default {
       4 : "spook"
     };
     
-    const resultsMap = {
-      "rock" : ["lizard","scissors"],
-      "paper" : ["rock","spook"],
-      "scissors" : ["paper","lizard"],
-      "lizard" : ["spook","paper"],
-      "spook" : ["scissors","rock"]
-    }
-    // game score state
-    const score = ref(0);
-    const localStorageKey = "rpsls-score";
-    
-    const isLocalStorageAvailable = () => {
-      const name = "localStorageTest-RPSLS";
-      try {
-        localStorage.setItem(name,name);
-        localStorage.removeItem(name);
-        return true;
-      } catch(e) {
-        console.warn("local storage not available");
-        return false;
-      }
-    }
-    const saveScore = () => {
-      if(isLocalStorageAvailable()){
-        localStorage.setItem(localStorageKey,JSON.stringify(score.value));
-      }
-    };
+    const { isRulesModalActive, showRulesModal, hideRulesModal } = useModal();
+    const { loadScore, saveScore } = useLocalStore();
+    const { score, currentGameStage, playerFigure, houseFigure, playAgain, selectPlayerFigure } = useGameLogic(possibleFigures, gameStages);
 
-    const loadScore = () => {
-      if(isLocalStorageAvailable()){
-        let savedScore = localStorage.getItem(localStorageKey);
-        if(savedScore){
-          score.value = JSON.parse(savedScore);
-        } 
-      }
-
-    };
-  onMounted(loadScore);
-
-    const incrementScore = () => {
-      score.value++;
-    };
-    const decrementScore = () => {
-      score.value--;
-    };
-
-    
-    
-    //game stage state
-    const currentGameStage = ref(gameStages.beforeSelect);
-    const setStage = stage => {
-      currentGameStage.value = stage;
-    };
-
-    // figure selection state
-    
-    const playerFigure = ref(null);
-    const houseFigure = ref(null);
-    
-      const getRandomNumberInRange = (min,max) => Math.round(Math.random() * (max - min) + min);
-      
-      
-
-      const wait = (fn,delay) => new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-          resolve(fn());
-        },delay)
-      })
-
-
-      const fireFunctionMultipleTimes = (fn, count, delay = 0) => {
-        let results = [];
-        for(let i = 0; i < count; i++ ){
-          results.push(wait(fn,delay*i));
-        }
-        return results;
-      }
-      const selectHouseFigure = () => {
-        houseFigure.value = getRandomNumberInRange(0,4);
-        console.log("house selected : ",possibleFigures[houseFigure.value]); 
-      };
-
-      const getWinner = () => {
-           if(playerFigure.value === houseFigure.value){
-             setStage(gameStages.draw);
-           } 
-          else if(resultsMap[possibleFigures[playerFigure.value]].includes(possibleFigures[houseFigure.value])){
-            console.log("player won");
-            setStage(gameStages.won);
-            incrementScore();
-          } else{
-            console.log("player lost");
-            setStage(gameStages.lost);
-            if(score.value > 0) decrementScore();
-          }
-          saveScore();
-        }
-
-      const selectPlayerFigure = figure => {
-        playerFigure.value = figure;
-        console.log("player selected : ", possibleFigures[playerFigure.value]);
-        setStage(gameStages.selected);
-        Promise.all(fireFunctionMultipleTimes(selectHouseFigure,10,200)).then(()=>{
-          getWinner();
-        });
-    };
-      const playAgain = () => {
-        setStage(gameStages.beforeSelect);
-
-      };
-      
-      // modal state
-      const isRulesModalActive = ref(false);
-      
-      const showRulesModal = () => {
-        isRulesModalActive.value = true;
-      };
-      const hideRulesModal = () => {
-        isRulesModalActive.value = false;
-      };
+    onMounted(() => loadScore(score));
+    watch(score, ()=> saveScore(score.value));
 
     return {
       score,
       currentGameStage,
-      selectPlayerFigure,
       playerFigure,
       houseFigure,
       possibleFigures,
-      playAgain,
+      isRulesModalActive,
       showRulesModal,
       hideRulesModal,
-      isRulesModalActive
-    }
+      selectPlayerFigure,
+      playAgain
+    };
   }
-}
-
-
+};
 
 </script>
 
@@ -215,6 +104,11 @@ main{
   width:100%;
   max-width:1000px;
   min-width:320px;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  margin-top:2rem;
+  margin-bottom:2rem;
 }
 
 @media(min-width:$desktop-breakpoint){
@@ -223,9 +117,10 @@ main{
     display: flex;
     justify-content: flex-end;
     padding:1rem;
+    
   }
   main {
-    margin-top:5rem;
+    margin-bottom:-4rem;
 
   }
 }
