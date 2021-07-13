@@ -1,5 +1,5 @@
 <template>
-  <button @click="clickHandler" class="play-button" >
+  <button @click="clickHandler" class="play-button" :aria-label="`Choose ${variant}`" >
       <FigureIcon :variant="variant"  />
   </button>
 </template>
