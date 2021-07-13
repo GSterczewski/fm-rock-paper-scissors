@@ -31,7 +31,6 @@ const useGameLogic = (possibleFigures, gameStages) => {
 
   const selectHouseFigure = () => {
     houseFigure.value = getRandomNumberInRange(0,4);
-    console.log("house selected : ",possibleFigures[houseFigure.value]); 
   };  
 
  
@@ -41,20 +40,17 @@ const useGameLogic = (possibleFigures, gameStages) => {
       setStage(gameStages.draw);
     } 
    else if(resultsMap[possibleFigures[playerFigure.value]].includes(possibleFigures[houseFigure.value])){
-     console.log("player won");
      setStage(gameStages.won);
      incrementScore();
    } else{
-     console.log("player lost");
      setStage(gameStages.lost);
      if(score.value > 0) decrementScore();
    }
-  //  saveScore(score.value);
+  
  }
 
  const selectPlayerFigure = figure => {
   playerFigure.value = figure;
-  console.log("player selected : ", possibleFigures[playerFigure.value]);
   setStage(gameStages.selected);
   Promise.all(fireFunctionMultipleTimes(selectHouseFigure,10,200)).then(()=>{
     getWinner();
