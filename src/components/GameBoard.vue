@@ -132,7 +132,7 @@ export default {
       left: -5%;
     }
   @media(max-width:500px){
-    transform: scale(0.8);
+    transform: scale(0.75);
     }
   }
    .gameboard__stage-2 {

@@ -69,11 +69,13 @@ export default {
 
 <style lang="scss">
 .figure {
-  --mobile-breakpoint: 768px;
+   $mobile-breakpoint: 768px;
+
   display: flex;
   align-items: center;
   justify-content: center;
   border:none;
+  
   &__placeholder-icon{
     color:var(--color-text);
     font-size:5rem;
@@ -92,7 +94,7 @@ export default {
     &--large{
       @include circle(150px);
 
-      @media(max-width:768px){
+      @media(max-width: $mobile-breakpoint){
         @include circle(100px);
       }
 
@@ -103,7 +105,7 @@ export default {
   }
   &--large {
     @include circle(200px);
-    @media(max-width:768px){
+    @media(max-width:$mobile-breakpoint){
         @include circle(130px);
       }
   }

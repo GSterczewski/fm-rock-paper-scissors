@@ -107,17 +107,18 @@ main{
   height: 60vh;
   display: flex;
   align-items: center;
-  margin-top:2rem;
-  margin-bottom:2rem;
 }
 
+.rules-button-container {
+  margin-bottom: 4rem;
+}
 @media(min-width:$desktop-breakpoint){
   .rules-button-container{
     width:100%;
     display: flex;
     justify-content: flex-end;
     padding:1rem;
-    
+    margin-bottom:0;
   }
   main {
     margin-bottom:-4rem;
