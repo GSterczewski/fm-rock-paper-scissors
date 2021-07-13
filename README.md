@@ -27,7 +27,12 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+Mobile view
+
+![](./screenshot_mobile.png)
+
+Desktop view
+![](./screenshot_desktop.png)
 
 ### Links
 
